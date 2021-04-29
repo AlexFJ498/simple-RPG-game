@@ -1,30 +1,14 @@
 let finish = false;
 
-function setGameStart(e, classType){
+function setGameStart(e, response){
     e.preventDefault();
-    switch (classType) {
-        case "Cazador":
-            player = new Player(classType, 200, 0, 50, 200, 100);
-            break;
-            
-        case "Orco":
-            player = new Player(classType, 100, 0, 100, 150, 200);
-            break;
-            
-        case "Guerrero":
-            player = new Player(classType, 200, 0, 200, 100, 50);
-            break;
-            
-        case "Mago":
-            player = new Player(classType, 70, 100, 150, 150, 100);
-            break;
-    }
+    player = new Player(response.name, response.health, response.mana, response.strength, response.agility, response.speed);
 
-    let html = `<img src="img/avatar-player/` + classType.toLowerCase() + `.png" class="img-avatar"> 
+    let html = `<img src="` + response.image + `" class="img-avatar"> 
                 <div class="desc">
                     <div class="info" id="infoEnemy"></div>
                     <div class="finish" id="victory"></div>
-                    <h3>` + classType + `</h3>
+                    <h3>` + player.getClassType() + `</h3>
                     <p id="health-player">Vida: ` + player.getHealth() + `</p>
                     <p>Maná: ` + player.getMana() + `</p>
                     <p>Fuerza: ` + player.getStrength() + `</p>
@@ -53,24 +37,12 @@ function setGameStart(e, classType){
     searchBtn();
 }
 
-function setFight(e){
+function setFight(e, response){
     e.preventDefault();
 
-    let enemy0 = new Enemy("Goblin", 100, 0, 50, 100, 100);
-    let enemy1 = new Enemy("Troll", 200, 0, 150, 80, 150);
-    let chooseRandomEnemy = Math.floor(Math.random() * Math.floor(2));
-    switch (chooseRandomEnemy) {
-        case 0:
-            enemy = enemy0;
-            break;
+    enemy = new Enemy(response.name, response.health, response.mana, response.strength, response.agility, response.speed);
     
-        case 1:
-            enemy = enemy1;
-            break;
-    }
-
-    
-    let html = `<img src="img/avatar-enemies/` + enemy.getEnemyType().toLowerCase() + `.png" class="img-avatar"> 
+    let html = `<img src="` + response.image + `" class="img-avatar"> 
                 <div class="desc">
                     <div class="info" id="infoPlayer"></div>
                     <div class="finish" id="lost"></div>
