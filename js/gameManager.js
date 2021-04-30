@@ -19,6 +19,7 @@ function setGameStart(e, response){
                
     $('#header').fadeOut();
     $('#interface').fadeOut();
+    $('.hidden_stats').fadeOut();
 
     $("#actions").html(`<a href="#" class="btn-prefight" id="search">Buscar un enemigo</a>`);
     
@@ -131,10 +132,12 @@ function insertInfoEnemy(info){
 
 function insertVictory(){
     $("#victory").html("¡HAS GANADO!").fadeIn(500);
+    $(".back").fadeIn(500);
     finish = true;
 }
 
 function insertLost(){
     $("#lost").html("HAS PERDIDO...").fadeIn(500);
+    $(".back").fadeIn(500);
     finish = true;
 }

@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div>
+        <button class="back">Volver</button>
+    </div>
+
     <div class="header" id="header">
         <p>¡Juega al mejor RPG que se haya creado nunca!</p>
         <h2>Elige tu personaje</h2>
@@ -26,17 +30,29 @@
     <div class="interface" id="interface"> 
         <?php $sql = "SELECT * FROM players"; ?>
         <?php $result = mysqli_query($conn, $sql); ?>
-        <?php while($row = mysqli_fetch_array($result)){ 
-            ?>
-            <a href="#" class="player" data-type="<?php echo $row['name'] ?>">
-                <img src="<?php echo $row['image'] ?>">
-                <div class="desc">
-                    <h3><?php echo $row['name'] ?></h3>
-                    <p><?php echo $row['description'] ?></p>
+        <?php while($row = mysqli_fetch_array($result)){ ?>
+            <div style="display: flex; flex-wrap: wrap; width: 370px;">
+                <a href="#" class="player" data-type="<?php echo $row['name'] ?>" >
+                    <img src="<?php echo $row['image'] ?>">
+                    <div class="desc">
+                        <h3><?php echo $row['name'] ?></h3>
+                        <p><?php echo $row['description'] ?></p>
+                    </div>
+                </a>
+                
+                <div class="interface" style="justify-content: normal !important; display: block">
+                    <div class="hidden_stats" data-type="<?php echo $row['name'] ?>">
+                        <h4>Vida: <?php echo $row['health'] ?></h4>
+                        <h4>Maná: <?php echo $row['mana'] ?></h4>
+                        <h4>Fuerza: <?php echo $row['strength'] ?></h4>
+                        <h4>Agilidad: <?php echo $row['agility'] ?></h4>
+                        <h4>Velocidad: <?php echo $row['speed'] ?></h4>
+                    </div>
                 </div>
-            </a>
+            </div>
         <?php } ?>
     </div>
+
 
     <div class="actions" id="actions"></div>
     <div class="arena" id="arena"></div>
@@ -46,5 +62,5 @@
 <script src="js/gameManager.js"></script>
 <script src="js/player.js"></script>
 <script src="js/enemy.js"></script>
-<script src="components/eventListeners.js"></script>
+<script src="js/eventListeners.js"></script>
 </html>
